@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MSU Signature Library Outlook add-in</title>
+
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+
+    <!-- For more information on Office UI Fabric, visit https://developer.microsoft.com/fabric. -->
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css"/>
+
+    <!-- Template styles -->
+    <link href="taskpane.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="ms-font-m ms-welcome ms-Fabric">
+    <header class="ms-welcome__header ms-bgColor-neutralLighter">
+        <img width="350" height="119" src="../../assets/logo-filled.png" alt="Contoso" title="MSU" />
+    </header>
+    <section id="sideload-msg" class="ms-welcome__main">
+        <h2 class="ms-font-xl">A program to manage your email signatures</h2>
+    </section>
+    <main id="app-body" class="ms-welcome__main" style="display: none;">
+        <h2 class="ms-font-xl"></h2>
+        <p><label id="item-subject"></label></p>
+    </main>
+
+	
+    
+    <br><br>
+
+  <button onclick="document.getElementById('OutsideModal').style.display='block'" style="width:auto;" id = "showLib">Show current signature library</button>
+	<div id="OutsideModal" class="modal">
+  	  <form class="modal-content animate" method="post">
+    	    <!--div class="container"-->
+            
+            <div class="row" id="row">
+                <div class="left" id="left" style="background-color:#bbb;">
+                  <h2>Signatures</h2>
+                  <input type="text" id="mySearch" placeholder="Search" title="Type in a signature name">
+                  <ul id="myMenu">
+                  </ul>
+                </div>
+                
+                <div class="right" style="background-color:#ddd;">
+                    <textarea placeholder="Signature title" id="Sig_title", cols="24"></textarea>
+                    <textarea placeholder="Signature message" id="Sig_message" cols="24" rows="5"></textarea>
+                    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Add new signature</button>
+                      <div id="id01" class="modal">
+                        <div class = "modal-content">
+                            <form class="modal-content animate" method="post">
+                                <div class="container">
+                                  <label for="add_Signature"><b>Store new signature</b></label>
+                                    <br><br>
+                                  <input type="text" placeholder="Enter title" id="title_input" required>
+                                    <textarea placeholder="Enter signature message here" id="message_input" cols="30" rows="5"></textarea>
+                                    <br>
+                                    
+                                </div>
+
+                                <div class="container" style="background-color:#f1f1f1">
+                                      <button type='button' class = "addbtn" id='addToLib'>Add new signature to library</button>
+                                      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Close</button>
+                              
+                                </div>
+                             </form>
+                          </div>
+                        </div>
+                    <button type='button' id='removeButton'>Delete signature from library</button>
+                        
+                 </div>
+              </div>
+
+
+    	    <!--/div--->
+
+    	    <div class="container" style="background-color:#f1f1f1">
+      	  	    <button type="button" onclick="document.getElementById('OutsideModal').style.display='none'" class="cancelbtn">Close</button>
+    	    </div>
+  	    </form>
+    </div>
+    <br><br>
+
+    <br><br>
+
+    <!-- Dropdown list of Signature titles -->
+    Here are your signatures:
+    <form id="dropDownList" action="taskpane.js">
+        <input list="signatures" name="signature" id="signature">
+        <datalist id="signatures">
+          <option value="Homer"></option>
+        </datalist> 
+        <br>
+        <input type="button" class="button" id="applySignatureButton" value="Apply to email"/>
+        <input type="button" class="button" id="imFeelingLucky" value="I'm feeling lucky"/>
+        <br><br> 
+      </form>
+</body>
+</html>
+
+<!-- Referenced code: https://stackoverflow.com/questions/19908215/adding-user-input-to-a-list-of-text-items-on-a-html-page/42950658 
+                     https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_vertical_tabs-->
